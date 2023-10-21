@@ -1,0 +1,24 @@
+void topo(int node,int V, vector<int> adj[],vector<int> &vis,vector<int> &ans)
+	{
+	    if(vis[node] == 1) return;
+	    vis[node] = 1;
+	    
+	    for(int i=0;i<adj[node].size();i++)
+	    {
+	        topo(adj[node][i],V,adj,vis,ans);
+	    }
+	    ans.push_back(node);
+	}
+	
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    // using DFS
+	    vector<int> ans;
+	    vector<int> vis(V,0);
+	    for(int i=0;i<V;i++){
+	        if(vis[i] == 0)
+	            topo(i,V,adj,vis,ans);
+	    }
+	    reverse(ans.begin(),ans.end());
+	    return ans;
+	}
